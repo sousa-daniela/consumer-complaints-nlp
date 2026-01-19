@@ -3,6 +3,9 @@
 
 **Author:** Daniela de Sousa Silva
 
+## 2026-01-19 Status: This project is currently under active development.
+The core NLP pipeline and methodology are implemented; documentation and analysis are being refined.
+
 ## Description
 
 This project applies NLP techniques to extract recurring themes from unstructured consumer complaint narratives. The scenario mirrors a real-world governance context in which decision-makers must identify the most relevant issues from large volumes of free-text citizen feedback.
@@ -10,9 +13,6 @@ This project applies NLP techniques to extract recurring themes from unstructure
 To simulate it, the project uses the Consumer Complaint Database published by the Consumer Financial Protection Bureau. Due to size and licensing considerations, the original dataset is not included in this repository and must be downloaded separately.
 
 The project follows a complete exploratory NLP pipeline, from data filtering and linguistic preprocessing to vectorization and topic extraction using multiple modeling approaches.
-
-## 2026-01-19 Status: This project is currently under active development.
-The core NLP pipeline and methodology are implemented; documentation and analysis are being refined.
 
 ---
 
