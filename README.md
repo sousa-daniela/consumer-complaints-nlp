@@ -1,10 +1,6 @@
-
 # NLP-Based Topic Extraction of Consumer Complaints
 
 **Author:** Daniela de Sousa Silva
-
-## 2026-01-19 Status: This project is currently under active development.
-The core NLP pipeline and methodology are implemented; documentation and analysis are being refined.
 
 ## Description
 
@@ -12,7 +8,7 @@ This project applies NLP techniques to extract recurring themes from unstructure
 
 To simulate it, the project uses the Consumer Complaint Database published by the Consumer Financial Protection Bureau. Due to size and licensing considerations, the original dataset is not included in this repository and must be downloaded separately.
 
-The project follows a complete exploratory NLP pipeline, from data filtering and linguistic preprocessing to vectorization and topic extraction using multiple modeling approaches.
+The project follows a complete exploratory NLP pipeline, from data filtering and linguistic preprocessing to vectorization, topic extraction, and quantitative evaluation using multiple modeling approaches.
 
 ---
 
@@ -20,9 +16,10 @@ The project follows a complete exploratory NLP pipeline, from data filtering and
 
 - **Text Preprocessing Pipeline:** Lowercasing, noise removal, stopword filtering, and context-aware lemmatization using spaCy.
 - **Length-Based Filtering and Sampling:** Removal of very short complaints and random sampling to balance computational efficiency and thematic diversity.
-- **N-gram Integration:** Extraction of unigrams and bigrams during vectorization to capture meaningful multi-word expressions such as _“credit card”_.
-- **Vectorization Strategies:** Bag-of-Words and TF-IDF representations for comparative analysis.
-- **Comparative Topic Modeling:** Application and comparison of Latent Dirichlet Allocation (LDA) and Non-negative Matrix Factorization (NMF).
+- **N-gram Integration:** Extraction of unigrams and bigrams during vectorization to capture meaningful multi-word expressions such as _"credit report"_ or _"identity theft"_.
+- **Vectorization Comparison:** Bag-of-Words and TF-IDF representations are applied and compared directly, highlighting differences in how each method weights frequent vs. distinctive terms.
+- **Comparative Topic Modeling:** LDA applied to BoW features and NMF applied to TF-IDF features, reflecting the mathematical formulation of each model.
+- **Independent Model Evaluation:** LDA is evaluated using C_v coherence; NMF using reconstruction error (Frobenius norm) — each assessed with the metric suited to its optimization objective.
 - **Reproducibility:** Intermediate results are stored as pickle files to reduce runtime and ensure reproducibility.
 
 ---
@@ -43,14 +40,14 @@ The project follows a complete exploratory NLP pipeline, from data filtering and
 consumer-complaints-nlp/
 │
 ├── data/
-│   ├── complaints.csv   # To be downloaded manually (not included)
+│   ├── complaints.csv                  # To be downloaded manually (not included)
 │   ├── complaints_sample.pkl
 │   └── complaints_sample_cleaned.pkl
 │
 ├── notebooks/
 │   └── topic_modeling.ipynb
 │
-├── requirements.txt   # Project dependencies
+├── requirements.txt                    # Project dependencies
 └── README.md
 ```
 
@@ -64,16 +61,16 @@ consumer-complaints-nlp/
 
 ```
 git clone https://github.com/sousa-daniela/consumer-complaints-nlp.git
-cd conszmer-complaints-nlp
+cd consumer-complaints-nlp
 ```
- 
+
 2. **Create and Activate a Virtual Environment**
 
 ```
 python3 -m venv venv
 source venv/bin/activate
 ```
- 
+
 3. **Install Dependencies**
 
 ```
@@ -112,21 +109,24 @@ notebooks/topic_modeling.ipynb
 ```
     
 2. Run the notebook sequentially from top to bottom to:
-    
+
     - filter and sample complaints,
     - preprocess and lemmatise text,
     - generate n-grams and vector representations,
-    - extract topics using LDA and NMF.
+    - compare BoW and TF-IDF vectorization outputs,
+    - extract topics using LDA and NMF,
+    - evaluate each model independently and visualize results.
 
-Intermediate artefacts are automatically saved in data.
+Intermediate artefacts are automatically saved in `data/`.
 
 ---
 
 ## Methodological Notes
 
-- Topic modeling is performed in an unsupervised, exploratory setting. Topic quality is assessed qualitatively based on interpretability and semantic coherence.  
+- Topic modeling is performed in an unsupervised, exploratory setting with no ground-truth labels. Topic quality is assessed using quantitative metrics (C_v coherence for LDA, reconstruction error for NMF), as well as qualitative inspection of keyword interpretability.
+- LDA and NMF are evaluated independently using metrics suited to each model's mathematical formulation, and the optimal number of topics is determined separately for each.
 - N-grams are incorporated directly during vectorization to improve topic interpretability without introducing additional preprocessing complexity.
-- LDA and NMF are compared to highlight differences between probabilistic and matrix-factorization-based approaches.
+- LDA and NMF are paired with BoW and TF-IDF respectively, reflecting the generative assumptions of LDA and the signal quality requirements of NMF.
 
 ---
 
